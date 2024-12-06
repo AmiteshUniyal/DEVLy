@@ -112,7 +112,7 @@ export const login = async (req, res) => {
         });
     } 
     catch (error) {
-        console.error("Unhandled error in login controller:", error.message);
+        console.error("error in login controller:", error.message);
         return res.status(500).json({ error: "Internal server error" });
     }
 };
