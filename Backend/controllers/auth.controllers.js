@@ -63,7 +63,6 @@ export const signup = async (req,res) => {
     }
 }
 
-
 export const login = async (req, res) => {
     try {
         const { username, password } = req.body;
@@ -116,7 +115,6 @@ export const login = async (req, res) => {
         return res.status(500).json({ error: "Internal server error" });
     }
 };
-
 
 export const logout = async (req,res) => {
     try {

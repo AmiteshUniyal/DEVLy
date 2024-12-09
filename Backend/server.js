@@ -1,5 +1,7 @@
 import express, { urlencoded } from 'express';
 import authRoutes from './routes/auth.routes.js';
+import postRoutes from './routes/post.routes.js'
+import notifRoutes from './routes/notification.routes.js'
 import connectMongoDB from './db/mongodb.js';
 import userRoutes from './routes/user.routes.js'
 import dotenv from 'dotenv';
@@ -16,12 +18,17 @@ cloudinary.config({
 const PORT = process.env.PORT || 8080;
 const app = express();
 
+//Middleware
 app.use(express.json());
 app.use(express.urlencoded({extended : true})); 
 app.use(cookieParser());
 
+//Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/post", postRoutes);
+app.use("/api/notification", notifRoutes);
+
 
 app.get("/", (req, res) => {
     res.send("hello Biatch"); 

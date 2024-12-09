@@ -23,7 +23,7 @@ export const followUnfollowUser = async (req,res) => {
 
         const {id}  = req.params;
         const userToModify = await User.findById(id);
-        const currentUser = await User.findById(req.user._id);//issue
+        const currentUser = await User.findById(req.user._id);
         
         if(id === req.user._id.toString()){
             return res.status(400).json({error: "cannot follow/unfollow yourself"});
@@ -62,7 +62,6 @@ export const followUnfollowUser = async (req,res) => {
 	}
 }
 
-
 export const getSuggestedUser = async (req, res) =>{ 
     try {
         const userId = req.user._id;
@@ -92,7 +91,6 @@ export const getSuggestedUser = async (req, res) =>{
 		res.status(500).json({ error: error.message });
     }
 } 
-
 
 export const updateUserProfile = async (req,res) => {
     const { fullName, email, username, currentPassword, newPassword, bio, link } = req.body;
@@ -155,4 +153,3 @@ export const updateUserProfile = async (req,res) => {
 		res.status(500).json({ error: error.message });
     }
 }
-
