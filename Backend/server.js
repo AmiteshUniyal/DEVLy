@@ -7,6 +7,7 @@ import userRoutes from './routes/user.routes.js'
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import {v2 as cloudinary} from 'cloudinary';
+import cors from "cors";
 
 dotenv.config();
 cloudinary.config({
@@ -22,6 +23,13 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended : true})); 
 app.use(cookieParser());
+app.use(
+    cors({
+      origin: process.env.F_URL,
+      credentials: true,
+    })
+  );
+  
 
 //Routes
 app.use("/api/auth", authRoutes);

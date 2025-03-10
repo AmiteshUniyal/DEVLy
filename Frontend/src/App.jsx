@@ -1,35 +1,56 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import HomePage from "./pages/home/homePage";
+import LoginPage from "./pages/auth/loginPage";
+import SignUpPage from "./pages/auth/signUpPage";
+import Sidebar from "./components/common/Sidebar";
+import NotificationPage from "./pages/notif/NotificationPage";
+import ProfilePage from "./pages/profile/profilePage";
+import { useContext, useEffect } from "react";
+import AppContext from "./context/contextapi";
+import { FaSpinner } from "react-icons/fa";
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
+  const { authenticated, loading } = useContext(AppContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!loading && !authenticated && location.pathname !== "/login" && location.pathname !== "/signup") {
+      navigate("/login");
+    }
+  }, [authenticated, loading, location.pathname, navigate]);
+
+  const hideSidebar = ["/login", "/signup"];
+  const showSidebar = authenticated && !hideSidebar.includes(location.pathname);
+
+  if (loading) {
+    return (<div className="h-screen w-screen flex justify-center items-center text-white ">
+      <FaSpinner className="text-4xl text-blue-600 animate-spin" />Please Wait...
+    </div>);
+  }
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="flex text-white">
+      {showSidebar && <Sidebar />}
+      <Routes>
+        {authenticated ? (
+          <>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/notifications" element={<NotificationPage />} />
+            <Route path="/profile/:username" element={<ProfilePage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
+          </>
+        ) : (
+          <>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
+          </>
+        )}
+      </Routes>
+    </div>
+  );
 }
 
-export default App
+export default App;
