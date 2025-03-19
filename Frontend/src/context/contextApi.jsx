@@ -39,16 +39,29 @@ export const AppProvider = ({ children }) => {
   
     useEffect(() => {
       checkAuth(); 
-    }, []);
+    }, []); 
+     
+    
+    //this is used to remove and add posts simultaneously
+	  const [posts, setPosts] = useState([]);
+     
+    
+    const contextValues = {
+      flag,
+      toggleFlag,
 
-    //just toggling the postType
-    const [postType, setPostType] = useState("forYou");
-     const toggleType = (str) => {
-      setPostType((prev) => str);
-     }
+      authenticated,
+      loading,
+      checkAuth,
+      authUser,
 
+      posts,
+
+      setPosts,
+    };
+  
     return (
-      <AppContext.Provider value={{ flag, toggleFlag,     authenticated, loading, checkAuth, authUser,    postType , toggleType }}>
+      <AppContext.Provider value={contextValues}>
         {children}
       </AppContext.Provider>
     );

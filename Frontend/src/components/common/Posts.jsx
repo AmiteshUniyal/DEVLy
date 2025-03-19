@@ -4,24 +4,24 @@ import { useState, useEffect, useContext } from "react";
 import AppContext from "../../context/contextapi";
 import { FaSpinner } from "react-icons/fa";
 
-const Posts = () => {
-	const { authUser, postType } = useContext(AppContext);
-	const [posts, setPosts] = useState([]);
+const Posts = ({type, username, Id}) => {
+	
+	const { authUser, posts, setPosts } = useContext(AppContext);
 	const [error, setError] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
 
 	const getPostEndpoint = () => {
-		if (postType === "forYou") {
+		if (type === "forYou") {
 			return "/post/all";
 		} 
-		else if (postType === "following") {
+		else if (type === "following") {
 			return "/post/following";
 		}
-		else if (postType === "posts") {
-			return `/post/user/${authUser?.username}`;
+		else if (type === "posts") {
+			return `/post/user/${username}`;
 		}
-		else if (postType === "likes") {
-			return `/post/likes/${authUser?._id}`;
+		else if (type === "likes") {
+			return `/post/likes/${Id}`;
 		}
 		else {
 			return "/post/all";
@@ -33,16 +33,18 @@ const Posts = () => {
 		try {
 			const res = await axiosInstance.get(getPostEndpoint(), { withCredentials: true });
 			setPosts(res.data);
-		} catch (err) {
+		} 
+		catch (err) {
 			setError(err.response?.data?.error || "Something went wrong");
-		} finally {
+		} 
+		finally {
 			setIsLoading(false);
 		}
 	};
 
 	useEffect(() => {
 		fetchPosts();
-	}, [postType, authUser?.username, authUser?._id]);
+	}, [type, authUser?.username, authUser?._id]);
 
 	return (
 		<>

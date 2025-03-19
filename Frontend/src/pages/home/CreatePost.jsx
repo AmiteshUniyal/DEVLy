@@ -3,43 +3,72 @@ import { useState, useEffect, useRef } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import { useContext } from "react";
 import AppContext from "../../context/contextapi";
+import axiosInstance from "../../api/axiosInstance";
+import { FaSpinner } from "react-icons/fa";
 
 const CreatePost = () => {
 
-  const {flag} = useContext(AppContext);
+  const {flag, authUser} = useContext(AppContext);
 
   const [text, setText] = useState("");
   const [img, setImg] = useState(null);
-
+  const [imgPrev, setImgPrev] = useState(null);
+  const [isPending, setIsPending] = useState(false);
   const ImgRef = useRef(null);
 
-  const isPending = false;
-  const isError = false;
-
-  const data = {
-    profileImg: "/avatars/boy1.png",
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Post created successfully");
-  };
+    setIsPending(true);
+
+    try {
+      let imgBase64 = null;
+
+      if (img) {
+        const file = img;
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        
+        await new Promise((resolve, reject) => {
+          reader.onload = () => {
+            imgBase64 = reader.result;
+            resolve();
+          };
+          reader.onerror = (error) => reject(error);
+        });
+      }
+
+      const res = await axiosInstance.post("/post/create", { text, img : imgBase64 }, { withCredentials: true });
+
+      const data = res.data;
+      setText("");
+      setImg(null);
+      setImgPrev(null);
+      console.log("Post created successfully:", data);
+      
+    } 
+    catch (err) {
+      console.error("Failed to create post:", err.response?.data?.error || err.message);
+    } 
+    finally {
+      setIsPending(false);
+    }
+};
 
   const handleImgChange = (e) => {
     const file = e.target.files[0];
-    if(file) {
-      const imageURL = URL.createObjectURL(file);
-      setImg(imageURL);
+    if (file) {
+      setImg(file);
+      setImgPrev(URL.createObjectURL(file));
     }
   };
 
   useEffect(() => {
     return () => {
-      if (img) {
-        URL.revokeObjectURL(img);
+      if (imgPrev) {
+        URL.revokeObjectURL(imgPrev);
       }
     };
-  }, [img]);
+  }, [imgPrev]);
 
   return (
     <div
@@ -48,7 +77,7 @@ const CreatePost = () => {
       }`}
     >
       <div className="w-8 h-8 rounded-full overflow-hidden">
-        <img src={data.profileImg || "/avatar-placeholder.png"} alt="Profile" />
+        <img src={authUser.profileImg || "/avatar-placeholder.png"} alt="Profile" />
       </div>
       <form className="flex flex-col gap-2 w-full" onSubmit={handleSubmit}>
         <textarea
@@ -57,17 +86,18 @@ const CreatePost = () => {
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
-        {img && (
+        {imgPrev && (
           <div className="relative mx-auto">
             <IoCloseSharp
               className="absolute top-0 right-0 text-white bg-gray-500 rounded-full w-5 h-5 cursor-pointer"
               onClick={() => {
                 setImg(null);
+                setImgPrev(null);
                 ImgRef.current.value = null;
               }}
             />
             <img
-              src={img}
+              src={imgPrev}
               alt="Uploaded preview"
               className="w-full h-72 object-contain rounded"
             />
@@ -83,12 +113,16 @@ const CreatePost = () => {
           </div>
           <input type="file" hidden accept="image/*" ref={ImgRef} onChange={handleImgChange}/>
           <button
-            className="bg-blue-500 text-white rounded-full px-4 py-1 text-sm font-medium hover:bg-blue-600 transition"
+            className="bg-blue-500 text-white rounded-full px-4 py-1 text-sm font-medium hover:bg-blue-600 transition flex items-center justify-center gap-2 w-16 h-7"
+            disabled={isPending}
           >
-            {isPending ? "Posting..." : "Post"}
+            {isPending ? (
+                <FaSpinner className="animate-spin" />
+            ) : (
+              "Post"
+            )}
           </button>
         </div>
-        {isError && <div className="text-red-500">Something went wrong</div>}
       </form>
     </div>
   );

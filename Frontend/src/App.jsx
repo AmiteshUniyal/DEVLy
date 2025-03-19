@@ -5,6 +5,7 @@ import SignUpPage from "./pages/auth/signUpPage";
 import Sidebar from "./components/common/Sidebar";
 import NotificationPage from "./pages/notif/NotificationPage";
 import ProfilePage from "./pages/profile/profilePage";
+import UserSearch from "./pages/searchPage/userSearch";
 import { useContext, useEffect } from "react";
 import AppContext from "./context/contextapi";
 import { FaSpinner } from "react-icons/fa";
@@ -41,6 +42,7 @@ function App() {
             <Route path="/profile/:username" element={<ProfilePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignUpPage />} />
+            <Route path="/search" element={<UserSearch/>}/>
           </>
         ) : (
           <>

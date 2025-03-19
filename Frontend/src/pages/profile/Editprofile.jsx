@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axiosInstance from "../../api/axiosInstance";
 
 const EditProfile = () => {
     const [formData, setFormData] = useState({
@@ -11,34 +12,51 @@ const EditProfile = () => {
         currentPassword: "",
     });
 
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isModal, setModal] = useState(false);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  
+  const [loading, setLoading] = useState(false);
+  
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const res = await axiosInstance.post("/user/update", formData, { withCredentials: true });
+      console.log("User updated successfully!" , res.data);
+    } 
+    catch (error) {
+      console.log(error?.response?.data?.message || "Something went wrong in updating user info");
+    } 
+    finally{
+      setLoading(false);
+      setModal(false);
+    }
+  };
+
   return (
     <>
-      {/* Open Modal Button */}
       <button
         className="border border-gray-700 text-white px-4 py-2 rounded-full text-sm hover:bg-gray-800 transition"
-        onClick={() => setModalOpen(true)}
+        onClick={() => setModal(true)}
       >
         Edit Profile
       </button>
 
-      {/* Modal */}
-      {isModalOpen && (
+      {isModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-gray-900 border border-gray-700 rounded-lg shadow-lg w-11/12 max-w-lg p-6">
-            {/* Modal Header */}
+            {/* Header */}
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-bold text-white">Update Profile</h3>
               <button
                 className="text-gray-400 hover:text-gray-200 transition"
-                onClick={() => setModalOpen(false)}
+                onClick={() => setModal(false)}
               >
-                ✕
+                ❌
               </button>
             </div>
 
@@ -46,12 +64,9 @@ const EditProfile = () => {
             <form
               className="flex flex-col gap-4"
               onSubmit={(e) => {
-                e.preventDefault();
-                alert("Profile updated successfully");
-                setModalOpen(false);
+                handleSubmit(e);
               }}
             >
-              {/* Full Name and Username */}
               <div className="flex flex-col md:flex-row gap-4">
                 <input
                   type="text"
@@ -70,8 +85,6 @@ const EditProfile = () => {
                   onChange={handleInputChange}
                 />
               </div>
-
-              {/* Email and Bio */}
               <div className="flex flex-col md:flex-row gap-4">
                 <input
                   type="email"
@@ -121,8 +134,14 @@ const EditProfile = () => {
               />
 
               {/* Submit Button */}
-              <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
-                Update
+              <button 
+                type="submit" 
+                disabled={loading} 
+                className={`px-4 py-2 rounded transition ${
+                  loading ? "bg-gray-500 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600 text-white"
+                }`}
+              >
+                {loading ? "Updating..." : "Update"}
               </button>
             </form>
           </div>
