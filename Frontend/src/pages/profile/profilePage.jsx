@@ -129,7 +129,7 @@ const ProfilePage = () => {
 	const [isPending, setIsPending] = useState(false);
 	
 	const handleImgSubmit = async(e) => {
-		// e.preventDefault();
+		e.preventDefault();
 		setIsPending(true);
 	
 		try {

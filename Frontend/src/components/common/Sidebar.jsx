@@ -39,7 +39,7 @@ export default function Sidebar () {
         <Link to="/" className="flex justify-center md:justify-start">
           <img
             src="/Logo/logo.devly.png"
-            className="ml-2 mt-2 w-14 rounded-full fill-white hover:bg-gray-800"
+            className="m-2 w-14 rounded-full fill-white hover:bg-gray-800"
             alt="Logo"
           />
         </Link>
@@ -65,16 +65,16 @@ export default function Sidebar () {
           <div className="flex justify-center md:justify-start">
             <Link
               to="/notifications"
-              className="flex gap-3 items-center hover:bg-white hover:text-black transition-all rounded-full duration-300 py-2 pl-2 pr-4 max-w-fit cursor-pointer"
+              className="flex gap-3 items-center hover:bg-white hover:text-black transition-all rounded-full duration-300 py-2 pl-2 pr-4 md:pr-14 lg:pr-14 max-w-fit cursor-pointer"
             >
-              <IoNotifications className="w-6 h-6" />
+              <IoNotifications className="w-8 h-8" />
               <span className="text-lg hidden md:block">Notifications</span>
             </Link>
           </div>
           {location.pathname === "/" && (
             <div className="flex justify-center md:justify-start" onClick={() => toggleFlag()}>
-              <div className="flex gap-3 items-center hover:bg-white hover:text-black transition-all rounded-full duration-300 py-2 pl-2 pr-4 max-w-fit cursor-pointer">
-                <MdAddCircleOutline className="w-6 h-6" />
+              <div className="flex gap-3 items-center hover:bg-white hover:text-black transition-all rounded-full duration-300 py-2 pl-2 pr-4 md:pr-14 lg:pr-14 max-w-fit cursor-pointer">
+                <MdAddCircleOutline className="w-8 h-8" />
                 <span className="text-lg hidden md:block">Create Post</span>
               </div>
             </div>
@@ -84,7 +84,7 @@ export default function Sidebar () {
               to={`/profile/${authUser?.username}`}
               className="flex gap-3 items-center hover:bg-white hover:text-black transition-all rounded-full duration-300 py-2 pl-2 pr-4 md:pr-14 lg:pr-14 max-w-fit cursor-pointer"
             >
-              <FaUser className="w-6 h-6" />
+              <FaUser className="w-8 h-8" />
               <span className="text-lg hidden md:block">Profile</span>
             </Link>
           </div>
