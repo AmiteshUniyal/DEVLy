@@ -10,15 +10,18 @@ import { useContext, useEffect } from "react";
 import AppContext from "./context/contextapi";
 import { FaSpinner } from "react-icons/fa";
 
-
 function App() {
-
   const { authenticated, loading } = useContext(AppContext);
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!loading && !authenticated && location.pathname !== "/login" && location.pathname !== "/signup") {
+    if (
+      !loading &&
+      !authenticated &&
+      location.pathname !== "/login" &&
+      location.pathname !== "/signup"
+    ) {
       navigate("/login");
     }
   }, [authenticated, loading, location.pathname, navigate]);
@@ -27,9 +30,12 @@ function App() {
   const showSidebar = authenticated && !hideSidebar.includes(location.pathname);
 
   if (loading) {
-    return (<div className="h-screen w-screen flex justify-center items-center text-white ">
-      <FaSpinner className="text-4xl text-blue-600 animate-spin" />Please Wait...
-    </div>);
+    return (
+      <div className="h-screen w-screen flex justify-center items-center text-white ">
+        <FaSpinner className="text-4xl text-blue-600 animate-spin" />
+        Please Wait...
+      </div>
+    );
   }
   return (
     <div className="flex text-white">
@@ -42,7 +48,7 @@ function App() {
             <Route path="/profile/:username" element={<ProfilePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignUpPage />} />
-            <Route path="/search" element={<UserSearch/>}/>
+            <Route path="/search" element={<UserSearch />} />
           </>
         ) : (
           <>

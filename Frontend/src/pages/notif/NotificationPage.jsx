@@ -21,12 +21,10 @@ const NotificationPage = () => {
       const res = await axiosInstance.get("/notification/", {
         withCredentials: true,
       });
-      setNotifications(res.data.reverse());      
-    } 
-    catch (err) {
+      setNotifications(res.data.reverse());
+    } catch (err) {
       setError(err.response?.data?.error || "Something went wrong");
-    } 
-    finally {
+    } finally {
       setIsLoading(false);
     }
   };
@@ -37,7 +35,6 @@ const NotificationPage = () => {
     }
   }, [authUser]);
 
-  
   function notificationTime(timestamp) {
     const now = new Date();
     const past = new Date(timestamp);
@@ -65,8 +62,6 @@ const NotificationPage = () => {
 
     return "Just now";
   }
-
-
 
   const deleteNotifications = async () => {
     setModal(false);
@@ -162,7 +157,10 @@ const NotificationPage = () => {
         </div>
       ) : (
         notifications.map((notification) => (
-          <div className="border-b border-gray-500 flex justify-between" key={notification._id}>
+          <div
+            className="border-b border-gray-500 flex justify-between"
+            key={notification._id}
+          >
             <div className="flex gap-3 p-4 items-center">
               {notification.type === "follow" ? (
                 <FaUser className="w-7 h-7 text-blue-400" />

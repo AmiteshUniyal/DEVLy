@@ -8,30 +8,24 @@ import { useContext, useState } from "react";
 import axiosInstance from "../../api/axiosInstance";
 import { FiSearch } from "react-icons/fi";
 
-
-
-export default function Sidebar () {
-  
+export default function Sidebar() {
   const { toggleFlag, checkAuth, authUser } = useContext(AppContext);
-  
-  const location = useLocation(); 
 
-  const[modal, setModal] = useState(false);
+  const location = useLocation();
+
+  const [modal, setModal] = useState(false);
 
   //logout functionality
-  const Logout = async() => {
+  const Logout = async () => {
     try {
-      await axiosInstance.post('/auth/logout', { withCredentials: true });
+      await axiosInstance.post("/auth/logout", { withCredentials: true });
 
       await checkAuth();
       setModal((prev) => !prev);
-
-    } 
-    catch (error) {
-        console.error(error);
+    } catch (error) {
+      console.error(error);
     }
-  }
-
+  };
 
   return (
     <>
@@ -72,7 +66,10 @@ export default function Sidebar () {
             </Link>
           </div>
           {location.pathname === "/" && (
-            <div className="flex justify-center md:justify-start" onClick={() => toggleFlag()}>
+            <div
+              className="flex justify-center md:justify-start"
+              onClick={() => toggleFlag()}
+            >
               <div className="flex gap-3 items-center hover:bg-white hover:text-black transition-all rounded-full duration-300 py-2 pl-2 pr-4 md:pr-14 lg:pr-14 max-w-fit cursor-pointer">
                 <MdAddCircleOutline className="w-8 h-8" />
                 <span className="text-lg hidden md:block">Create Post</span>
@@ -91,36 +88,40 @@ export default function Sidebar () {
         </div>
         {authUser && (
           <Link
-          to={`/profile/${authUser.username}`}
-          className="mt-auto mb-5 flex gap-2 items-start transition-all duration-300 hover:bg-white hover:text-black py-2 px-4 rounded-full group"
+            to={`/profile/${authUser.username}`}
+            className="mt-auto mb-5 flex gap-2 items-start transition-all duration-300 hover:bg-white hover:text-black py-2 px-4 rounded-full group"
           >
-          <div className="hidden md:inline-flex">
-            <img
-              className="w-8 rounded-full"
-              src={authUser?.profileImg || "/avatar-placeholder.png"}
-              alt="profile"
-            />
-          </div>
-          <div className="flex justify-between flex-1">
-            <div className="hidden md:block">
-              <p className="text-white font-bold text-sm w-20 truncate group-hover:text-black">{authUser?.fullName}</p>
-              <p className="text-gray-500 text-sm">@{authUser?.username}</p>
+            <div className="hidden md:inline-flex">
+              <img
+                className="w-8 rounded-full"
+                src={authUser?.profileImg || "/avatar-placeholder.png"}
+                alt="profile"
+              />
             </div>
-            <BiLogOut className="w-5 h-5 cursor-pointer" 
+            <div className="flex justify-between flex-1">
+              <div className="hidden md:block">
+                <p className="text-white font-bold text-sm w-20 truncate group-hover:text-black">
+                  {authUser?.fullName}
+                </p>
+                <p className="text-gray-500 text-sm">@{authUser?.username}</p>
+              </div>
+              <BiLogOut
+                className="w-5 h-5 cursor-pointer"
                 onClick={(e) => {
-									e.preventDefault();
-									setModal(true);
-								}} 
-            />
-          </div>
-        </Link>        
+                  e.preventDefault();
+                  setModal(true);
+                }}
+              />
+            </div>
+          </Link>
         )}
       </div>
       {modal && (
         <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50 ">
           <div className="bg-gray-900 p-5 rounded-lg border border-gray-500 max-h-[80vh] overflow-auto relative">
-            
-            <h2 className="text-xl text-center font-bold text-white mb-4">Are you sure you want to logout?</h2>
+            <h2 className="text-xl text-center font-bold text-white mb-4">
+              Are you sure you want to logout?
+            </h2>
 
             <div className="flex justify-center gap-3">
               <button
@@ -129,7 +130,7 @@ export default function Sidebar () {
               >
                 Cancel
               </button>
-              
+
               <button
                 onClick={Logout}
                 className="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-500"
@@ -142,6 +143,4 @@ export default function Sidebar () {
       )}
     </>
   );
-};
-
-
+}

@@ -7,8 +7,7 @@ import axiosInstance from "../../api/axiosInstance";
 import { FaSpinner } from "react-icons/fa";
 
 const CreatePost = () => {
-
-  const {flag, authUser} = useContext(AppContext);
+  const { flag, authUser } = useContext(AppContext);
 
   const [text, setText] = useState("");
   const [img, setImg] = useState(null);
@@ -27,7 +26,7 @@ const CreatePost = () => {
         const file = img;
         const reader = new FileReader();
         reader.readAsDataURL(file);
-        
+
         await new Promise((resolve, reject) => {
           reader.onload = () => {
             imgBase64 = reader.result;
@@ -37,22 +36,26 @@ const CreatePost = () => {
         });
       }
 
-      const res = await axiosInstance.post("/post/create", { text, img : imgBase64 }, { withCredentials: true });
+      const res = await axiosInstance.post(
+        "/post/create",
+        { text, img: imgBase64 },
+        { withCredentials: true }
+      );
 
       const data = res.data;
       setText("");
       setImg(null);
       setImgPrev(null);
       console.log("Post created successfully:", data);
-      
-    } 
-    catch (err) {
-      console.error("Failed to create post:", err.response?.data?.error || err.message);
-    } 
-    finally {
+    } catch (err) {
+      console.error(
+        "Failed to create post:",
+        err.response?.data?.error || err.message
+      );
+    } finally {
       setIsPending(false);
     }
-};
+  };
 
   const handleImgChange = (e) => {
     const file = e.target.files[0];
@@ -73,11 +76,14 @@ const CreatePost = () => {
   return (
     <div
       className={`flex p-4 items-start gap-4 border-b border-gray-500 ${
-        flag ? "block" : "hidden" 
+        flag ? "block" : "hidden"
       }`}
     >
       <div className="w-8 h-8 rounded-full overflow-hidden">
-        <img src={authUser.profileImg || "/avatar-placeholder.png"} alt="Profile" />
+        <img
+          src={authUser.profileImg || "/avatar-placeholder.png"}
+          alt="Profile"
+        />
       </div>
       <form className="flex flex-col gap-2 w-full" onSubmit={handleSubmit}>
         <textarea
@@ -111,16 +117,18 @@ const CreatePost = () => {
               onClick={() => ImgRef.current.click()}
             />
           </div>
-          <input type="file" hidden accept="image/*" ref={ImgRef} onChange={handleImgChange}/>
+          <input
+            type="file"
+            hidden
+            accept="image/*"
+            ref={ImgRef}
+            onChange={handleImgChange}
+          />
           <button
             className="bg-blue-500 text-white rounded-full px-4 py-1 text-sm font-medium hover:bg-blue-600 transition flex items-center justify-center gap-2 w-16 h-7"
             disabled={isPending}
           >
-            {isPending ? (
-                <FaSpinner className="animate-spin" />
-            ) : (
-              "Post"
-            )}
+            {isPending ? <FaSpinner className="animate-spin" /> : "Post"}
           </button>
         </div>
       </form>
