@@ -111,7 +111,6 @@ const ProfilePage = () => {
   const [isPending, setIsPending] = useState(false);
 
   const handleImgSubmit = async (e) => {
-    e.preventDefault();
     setIsPending(true);
 
     try {
@@ -338,7 +337,7 @@ const ProfilePage = () => {
             )}
             {isMyProfile || isFollow ? (
               postType === "posts" || postType === "likes" ? (
-                <div className="w-full overflow-hidden">
+                <div className="w-full overflow-hidden mb-12 md:mb-0">
                   <Posts
                     type={postType}
                     username={userProfile.username}

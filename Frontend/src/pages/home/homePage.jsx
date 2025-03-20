@@ -41,7 +41,9 @@ const HomePage = () => {
         </div>
       </div>
       <CreatePost />
-      <Posts type={postType} username={authUser.username} Id={authUser._id} />
+      <div className="mb-12 md:mb-0">
+        <Posts type={postType} username={authUser.username} Id={authUser._id} />
+      </div>
     </div>
   );
 };
