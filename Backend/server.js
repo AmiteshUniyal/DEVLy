@@ -26,7 +26,7 @@ app.use(express.urlencoded({extended : true}));
 app.use(cookieParser());
 app.use(
     cors({
-      origin: process.env.F_URL || "https://dev-kite3fhev-amitesh-uniyals-projects.vercel.app",
+      origin: process.env.F_URL || "https://dev-ly.vercel.app",
       credentials: true,
     })
   );
