@@ -32,94 +32,105 @@ export default function Sidebar() {
   };
 
   return (
-    <>
-      <div className="sticky w-18 h-screen top-0 flex flex-col border-r border-gray-500 z-30">
+    <>    
+      {/* Sidebar */}
+      <div className="sticky w-18 h-screen top-0 flex-col border-r border-gray-500 z-30 hidden md:flex">
         <Link to="/" className="flex justify-center md:justify-start">
           <img
             src="/Logo/logo.devly.png"
-            className="m-2 w-14 rounded-full fill-white hover:bg-gray-800"
+            className="m-2 w-14 rounded-full hover:bg-gray-800"
             alt="Logo"
           />
         </Link>
-        <div className="flex flex-col gap-3 mt-4">
-          <div className="flex justify-center md:justify-start">
-            <Link
-              to="/"
-              className="flex gap-3 items-center hover:bg-white hover:text-black transition-all rounded-full duration-300 py-2 pl-2 pr-4 md:pr-14 lg:pr-14 max-w-fit cursor-pointer"
-            >
-              <MdHomeFilled className="w-8 h-8" />
-              <span className="text-lg hidden md:block">Home</span>
-            </Link>
-          </div>
-          <div className="flex justify-center md:justify-start">
-            <Link
-              to="/search"
-              className="flex gap-3 items-center hover:bg-white hover:text-black transition-all rounded-full duration-300 py-2 pl-2 pr-4 md:pr-14 lg:pr-14 max-w-fit cursor-pointer"
-            >
-              <FiSearch className="w-8 h-8 " />
-              <span className="text-lg hidden md:block">Search</span>
-            </Link>
-          </div>
-          <div className="flex justify-center md:justify-start">
-            <Link
+        <div className="flex flex-col h-screen justify-between">
+          <div className="flex flex-col gap-3 mt-4">
+            <SidebarLink 
+              to="/" 
+              icon={<MdHomeFilled className="w-8 h-8" />} 
+              label="Home" 
+            />
+            <SidebarLink 
+              to="/search" 
+              icon={<FiSearch className="w-8 h-8" />} 
+              label="Search" 
+            />
+            <SidebarLink 
               to="/notifications"
-              className="flex gap-3 items-center hover:bg-white hover:text-black transition-all rounded-full duration-300 py-2 pl-2 pr-4 md:pr-14 lg:pr-14 max-w-fit cursor-pointer"
-            >
-              <IoNotifications className="w-8 h-8" />
-              <span className="text-lg hidden md:block">Notifications</span>
-            </Link>
-          </div>
-          {location.pathname === "/" && (
-            <div
-              className="flex justify-center md:justify-start"
-              onClick={() => toggleFlag()}
-            >
-              <div className="flex gap-3 items-center hover:bg-white hover:text-black transition-all rounded-full duration-300 py-2 pl-2 pr-4 md:pr-14 lg:pr-14 max-w-fit cursor-pointer">
-                <MdAddCircleOutline className="w-8 h-8" />
-                <span className="text-lg hidden md:block">Create Post</span>
+              icon={<IoNotifications className="w-8 h-8" />}
+              label="Notifications"
+            />
+            {location.pathname === "/" && (
+              <div className="flex justify-center md:justify-start">
+                <button
+                  onClick={toggleFlag}
+                  className="flex gap-3 items-center hover:bg-white hover:text-black transition-all rounded-full duration-300 py-2 pl-2 pr-4 max-w-fit cursor-pointer"
+                >
+                  <MdAddCircleOutline className="w-8 h-8" />
+                  <span className="text-lg hidden md:block">Create Post</span>
+                </button>
               </div>
-            </div>
-          )}
-          <div className="flex justify-center md:justify-start">
-            <Link
+            )}
+            <SidebarLink
               to={`/profile/${authUser?.username}`}
-              className="flex gap-3 items-center hover:bg-white hover:text-black transition-all rounded-full duration-300 py-2 pl-2 pr-4 md:pr-14 lg:pr-14 max-w-fit cursor-pointer"
-            >
-              <FaUser className="w-8 h-8" />
-              <span className="text-lg hidden md:block">Profile</span>
-            </Link>
+              icon={<FaUser className="w-8 h-8" />}
+              label="Profile"
+            />
           </div>
-        </div>
-        {authUser && (
-          <Link
-            to={`/profile/${authUser.username}`}
-            className="mt-auto mb-5 flex gap-2 items-start transition-all duration-300 hover:bg-white hover:text-black py-2 px-4 rounded-full group"
-          >
-            <div className="hidden md:inline-flex">
-              <img
-                className="w-8 rounded-full"
-                src={authUser?.profileImg || "/avatar-placeholder.png"}
-                alt="profile"
-              />
-            </div>
-            <div className="flex justify-between flex-1">
-              <div className="hidden md:block">
-                <p className="text-white font-bold text-sm w-20 truncate group-hover:text-black">
-                  {authUser?.fullName}
-                </p>
-                <p className="text-gray-500 text-sm">@{authUser?.username}</p>
+
+          {/* User Profile & Logout */}
+          {authUser && (
+            <Link to={`/profile/${authUser.username}`}>
+              <div className="mb-4 flex gap-2 items-start transition-all duration-300 hover:bg-white hover:text-black py-2 px-4 rounded-full group">
+                <div className="hidden md:inline-flex">
+                  <img
+                    className="w-8 rounded-full"
+                    src={authUser?.profileImg || "/avatar-placeholder.png"}
+                    alt="profile"
+                  />
+                </div>
+                <div className="flex justify-between flex-1">
+                  <div className="hidden md:block">
+                    <p className="text-white font-bold text-sm w-20 truncate group-hover:text-black">
+                      {authUser?.fullName}
+                    </p>
+                    <p className="text-gray-500 text-sm">@{authUser?.username}</p>
+                  </div>
+                  <BiLogOut
+                    className="w-5 h-5 cursor-pointer"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setModal(true);
+                    }}
+                  />
+                </div>
               </div>
-              <BiLogOut
-                className="w-5 h-5 cursor-pointer"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setModal(true);
-                }}
-              />
-            </div>
-          </Link>
-        )}
+            </Link>
+          )}
+        </div>
       </div>
+
+      {/* Bottom Navigation Bar */}
+      <div className="fixed  bottom-0 w-full border-t flex justify-around py-3 md:hidden z-50" style={{backgroundImage: "linear-gradient(to right,rgb(13, 32, 59), #0a0a0a)"}}>
+        <BottomNavLink to="/" icon={<MdHomeFilled className="w-6 h-6" />} />
+        <BottomNavLink to="/search" icon={<FiSearch className="w-6 h-6" />} />
+        {location.pathname === "/" && (
+          <button onClick={toggleFlag} className="text-white">
+            <MdAddCircleOutline className="w-6 h-6" />
+          </button>
+        )}
+        <BottomNavLink to="/notifications" icon={<IoNotifications className="w-6 h-6"/>} />
+        <BottomNavLink to={`/profile/${authUser?.username}`} icon={<FaUser className="w-5 h-5" />} />
+        <div className=" flex items-center">
+          <BiLogOut
+            className="w-5 h-5 cursor-pointer"
+            onClick={(e) => {
+              e.preventDefault();
+              setModal(true);
+            }}
+          />
+        </div>
+      </div>
+    
       {modal && (
         <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50 ">
           <div className="bg-gray-900 p-5 rounded-lg border border-gray-500 max-h-[80vh] overflow-auto relative">
@@ -136,7 +147,7 @@ export default function Sidebar() {
               </button>
 
               <button
-                onClick={() => {Logout()}}
+                onClick={() => {Logout}}
                 className="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-500"
               >
                 Logout
@@ -148,3 +159,23 @@ export default function Sidebar() {
     </>
   );
 }
+
+
+const SidebarLink = ({ to, icon, label }) => (
+  <div className="flex justify-center md:justify-start">
+    <Link
+      to={to}
+      className="flex gap-3 items-center hover:bg-white hover:text-black transition-all rounded-full duration-300 py-2 pl-2 pr-4 md:pr-14 max-w-fit cursor-pointer"
+    >
+      <span>{icon}</span>
+      <span className="text-lg hidden md:block">{label}</span>
+    </Link>
+  </div>
+);
+
+
+const BottomNavLink = ({ to, icon }) => (
+  <Link to={to} className="text-white flex items-center">
+    {icon}
+  </Link>
+);
