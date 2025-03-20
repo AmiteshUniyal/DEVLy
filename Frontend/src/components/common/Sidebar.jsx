@@ -4,11 +4,14 @@ import { FaUser } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
 import { Link, useLocation } from "react-router-dom";
 import AppContext from "../../context/contextapi";
-import { useContext, useState } from "react";
+import { useContext, useState, useNavigate } from "react";
 import axiosInstance from "../../api/axiosInstance";
 import { FiSearch } from "react-icons/fi";
 
 export default function Sidebar() {
+
+  const navigate = useNavigate();
+
   const { toggleFlag, checkAuth, authUser } = useContext(AppContext);
 
   const location = useLocation();
@@ -22,6 +25,7 @@ export default function Sidebar() {
 
       await checkAuth();
       setModal((prev) => !prev);
+      navigate("/login")
     } catch (error) {
       console.error(error);
     }
@@ -132,7 +136,7 @@ export default function Sidebar() {
               </button>
 
               <button
-                onClick={Logout}
+                onClick={() => {Logout()}}
                 className="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-500"
               >
                 Logout

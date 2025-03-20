@@ -31,7 +31,7 @@ const SignUpPage = () => {
         setLoading(true);
 
         try {
-            const response = await axiosInstance.post("/auth/signup", formData);
+            const response = await axiosInstance.post("/auth/signup", formData, {withCredentials : true});
 
             console.log("Signup Successful:", response.data);
             navigate("/login");
