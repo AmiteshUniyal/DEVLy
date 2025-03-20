@@ -1,16 +1,8 @@
 {
-  "builds": [
-    {
-      "src": "Backend/server.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "frontend/package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "frontend/dist" }
-    }
-  ],
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/Backend/server.js" }
+    { "source": "/api/(.*)", "destination": "https://devly-rt9v.onrender.com/api/$1" } 
+  ],
+  "redirects": [
+    { "source": "/(.*)", "destination": "/index.html", "statusCode": 200 }
   ]
 }
