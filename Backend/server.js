@@ -28,6 +28,8 @@ app.use(
     cors({
       origin: process.env.F_URL || "https://dev-ly.vercel.app",
       credentials: true,
+      methods: ["GET", "POST", "PUT", "DELETE"],
+      allowedHeaders: ["Content-Type", "Authorization"],
     })
   );
   
