@@ -1,12 +1,11 @@
 {
   "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/Backend/server.js"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/Frontend/index.html"
-    }
+    { "source": "/api/(.*)", "destination": "/Backend/server.js" }
+  ],
+  "redirects": [
+    { "source": "/favicon.ico", "destination": "/frontend/favicon.ico", "permanent": true }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
