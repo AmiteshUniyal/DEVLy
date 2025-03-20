@@ -2,9 +2,9 @@ import { MdHomeFilled, MdAddCircleOutline } from "react-icons/md";
 import { IoNotifications } from "react-icons/io5";
 import { FaUser } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate} from "react-router-dom";
 import AppContext from "../../context/contextapi";
-import { useContext, useState, useNavigate } from "react";
+import { useContext, useState } from "react";
 import axiosInstance from "../../api/axiosInstance";
 import { FiSearch } from "react-icons/fi";
 
