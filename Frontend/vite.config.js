@@ -6,9 +6,5 @@ export default defineConfig({
   build: {
     outDir: 'dist'
   },
-  server: {
-    proxy: {
-      '/api': 'https://devly-rt9v.onrender.com'
-    }
-  }
+  base: '/',
 });
