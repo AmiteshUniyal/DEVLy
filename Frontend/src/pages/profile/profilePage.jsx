@@ -10,6 +10,7 @@ import { FaArrowLeft } from "react-icons/fa6";
 import { IoCalendarOutline } from "react-icons/io5";
 import { FaLink } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
+import axios from "axios";
 
 const ProfilePage = () => {
   const [coverImg, setCoverImg] = useState(null);
@@ -45,7 +46,7 @@ const ProfilePage = () => {
 
       try {
         setIsLoading(true);
-        const res = await axiosInstance.get(`/user/profile/${username}`);
+        const res = await axios.get(`https://devly-rt9v.onrender.com/api/user/profile/${username}`);
         setUserProfile(res.data);
       } catch (err) {
         setError(err.res?.data?.error || "Failed to fetch userProfile");
@@ -145,8 +146,7 @@ const ProfilePage = () => {
         });
       }
 
-      const res = await axiosInstance.post(
-        "/user/update",
+      const res = await axiosInstance.post("/user/update",
         { profileImg: profileImgBase64, coverImg: coverImgBase64 },
         { withCredentials: true }
       );
