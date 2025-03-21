@@ -1,16 +1,16 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { HashRouter } from "react-router-dom"; // Change here
 import "./index.css";
 import App from "./App.jsx";
-import { BrowserRouter } from "react-router-dom";
 import { AppProvider } from "./context/contextapi";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <AppProvider> 
-      <BrowserRouter>
+    <AppProvider>
+      <HashRouter> {/* Change BrowserRouter → HashRouter */}
         <App />
-      </BrowserRouter>
+      </HashRouter>
     </AppProvider>
   </StrictMode>
 );
