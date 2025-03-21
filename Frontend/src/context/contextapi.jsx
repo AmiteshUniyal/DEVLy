@@ -39,7 +39,7 @@ export const AppProvider = ({ children }) => {
   
     useEffect(() => {
       checkAuth(); 
-    }, [authUser]); 
+    }, []); 
      
     
     //this is used to remove and add posts simultaneously
