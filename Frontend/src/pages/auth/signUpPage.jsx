@@ -55,7 +55,7 @@ const SignUpPage = () => {
                 />
             </div>
 
-            <div className="flex-1 flex flex-col justify-center items-center">
+            <div className="flex-1 flex flex-col justify-center items-center mx-4">
                 <form className="lg:w-2/3 mx-auto md:mx-20 flex gap-4 flex-col" onSubmit={handleSubmit}>
                     <img
                         src="/Logo/logo.devly.png"
@@ -132,7 +132,7 @@ const SignUpPage = () => {
                     <p className="text-white text-lg">Already have an account?</p>
                     <Link to="/login">
                         <button className="border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white py-2 px-4 rounded-full w-full">
-                            Sign in
+                            Log in
                         </button>
                     </Link>
                 </div>
