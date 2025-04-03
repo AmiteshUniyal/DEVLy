@@ -97,7 +97,7 @@ const EditProfile = () => {
                 <div className="relative flex-1">
                   <textarea
                     placeholder="Bio"
-                    className="w-full bg-gray-800 text-white border border-gray-700 rounded p-2 resize-none min-h-[42px]"
+                    className="flex-1 bg-gray-800 text-white border border-gray-700 rounded p-2 resize-none"
                     value={formData.bio}
                     name="bio"
                     onChange={handleInputChange}

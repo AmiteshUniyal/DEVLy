@@ -124,7 +124,7 @@ const Post = ({ post }) => {
 
   return (
     <div className="flex gap-2 items-start p-4 border-b border-gray-500">
-      <div className="w-8 rounded-full overflow-hidden ">
+      <div className="w-8 h-8 rounded-full overflow-hidden object-cover object-center">
         <Link to={`/profile/${postCreator.username}`}>
           <img
             src={postCreator.profileImg || "/avatar-placeholder.png"}
@@ -260,7 +260,7 @@ const Post = ({ post }) => {
                                 </span>
                               </div>
                             </Link>
-                            <p className="text-gray-300 break-words overflow-hidden overflow-wrap break-word whitespace-pre-wrap">
+                            <p className="text-gray-300 break-all overflow-hidden overflow-wrap break-word whitespace-pre-wrap">
                               {comment.text}
                             </p>
                           </div>
