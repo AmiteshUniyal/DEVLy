@@ -181,7 +181,7 @@ const NotificationPage = () => {
                 />
                 <div className="text-white">
                   <span className="font-bold">
-                    @{notification.from.username}
+                    @{notification.from.username.length > 15 ? `${notification.from.username}...` : notification.from.username}
                   </span>{" "}
                   {notification.type === "follow"
                     ? "followed you"
