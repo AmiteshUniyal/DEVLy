@@ -180,7 +180,7 @@ const ProfilePage = () => {
                     <FaArrowLeft className="w-4 h-4" />
                   </Link>
                   <div className="flex flex-col">
-                    <p className="font-bold text-lg truncate">{userProfile?.fullName}</p>
+                    <p className="font-bold text-lg">{userProfile?.fullName.length > 15 ? `${userProfile?.fullName.slice(0, 15)}...`: userProfile?.fullName}</p>
                   </div>
                 </div>
 
@@ -257,11 +257,11 @@ const ProfilePage = () => {
 
                 <div className="flex flex-col gap-4 mt-14 px-4">
                   <div className="flex flex-col">
-                    <span className="font-bold text-lg truncate">
-                      {userProfile?.fullName}
+                    <span className="font-bold text-lg">
+                      {userProfile?.fullName.length > 15 ? `${userProfile?.fullName.slice(0, 15)}...`: userProfile?.fullName}
                     </span>
                     <span className="text-sm text-slate-500 truncate">
-                      @{userProfile?.username}
+                      @{userProfile?.username.length > 15 ? `${userProfile?.username.slice(0, 15)}...`: userProfile?.username}
                     </span>
                     <br />
                     <span className="text-sm my-1">{userProfile?.bio}</span>
@@ -276,9 +276,9 @@ const ProfilePage = () => {
                             href={userProfile.link}
                             target="_blank"
                             rel="noreferrer"
-                            className="text-sm text-blue-500 hover:underline truncate"
+                            className="text-sm text-blue-500 hover:underline"
                           >
-                            {userProfile.link.replace("https://" * "")}
+                            {userProfile?.link.replace("https://", "").length > 10 ? `${userProfile?.link.replace("https://", "").slice(0, 10)}...` : userProfile?.link.replace("https://", "")}
                           </a>
                         </>
                       </div>

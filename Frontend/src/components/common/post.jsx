@@ -134,12 +134,12 @@ const Post = ({ post }) => {
       </div>
       <div className="flex flex-col flex-1">
         <div className="flex gap-2 items-center">
-          <Link to={`/profile/${postCreator.username}`} className="font-bold truncate">
-            {postCreator.fullName}
+          <Link to={`/profile/${postCreator.username}`} className="font-bold">
+            {postCreator.fullName.length > 15 ? `${postCreator.fullName.slice(0, 15)}...`: postCreator.fullName}
           </Link>
-          <span className="text-gray-500 flex gap-1 text-sm truncate">
+          <span className="text-gray-500 flex gap-1 text-sm">
             <Link to={`/profile/${postCreator.username}`}>
-              @{postCreator.username}
+              @{postCreator.username.length > 15 ? `${postCreator.username.slice(0, 15)}...`: postCreator.username}
             </Link>
             <p> . {postTime}</p>
           </span>
@@ -252,11 +252,11 @@ const Post = ({ post }) => {
                           <div className="flex flex-col flex-1 w-full">
                             <Link to={`/profile/${comment.user.username}`}>
                               <div className="flex items-center gap-2">
-                                <span className="font-bold text-white truncate">
-                                  {comment.user.fullName}
+                                <span className="font-bold text-white">
+                                  {comment.user.fullName.length > 15 ? `${comment.user.fullName.slice(0, 15)}...`: comment.user.fullName}
                                 </span>
                                 <span className="text-gray-400 text-sm truncate">
-                                  @{comment.user.username}
+                                  @{comment.user.username.length > 15 ? `${comment.user.username.slice(0, 15)}...`: comment.user.username}
                                 </span>
                               </div>
                             </Link>

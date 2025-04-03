@@ -33,7 +33,7 @@ function App() {
     return (
       <div className="h-screen w-screen flex justify-center items-center text-white ">
         <FaSpinner className="text-4xl text-blue-600 animate-spin" />
-         Please Wait...
+        <span> Please Wait...</span>
       </div>
     );
   }
