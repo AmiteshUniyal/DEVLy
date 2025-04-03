@@ -93,7 +93,7 @@ export default function Sidebar() {
                     <p className="text-white font-bold text-sm w-20 truncate group-hover:text-black">
                       {authUser?.fullName}
                     </p>
-                    <p className="text-gray-500 text-sm">@{authUser?.username}</p>
+                    <p className="text-gray-500 text-sm truncate">@{authUser?.username}</p>
                   </div>
                   <BiLogOut
                     className="w-5 h-5 cursor-pointer"

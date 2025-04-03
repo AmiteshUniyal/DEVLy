@@ -124,7 +124,7 @@ const Post = ({ post }) => {
 
   return (
     <div className="flex gap-2 items-start p-4 border-b border-gray-500">
-      <div className="w-8 rounded-full overflow-hidden">
+      <div className="w-8 rounded-full overflow-hidden ">
         <Link to={`/profile/${postCreator.username}`}>
           <img
             src={postCreator.profileImg || "/avatar-placeholder.png"}
@@ -134,10 +134,10 @@ const Post = ({ post }) => {
       </div>
       <div className="flex flex-col flex-1">
         <div className="flex gap-2 items-center">
-          <Link to={`/profile/${postCreator.username}`} className="font-bold">
+          <Link to={`/profile/${postCreator.username}`} className="font-bold truncate">
             {postCreator.fullName}
           </Link>
-          <span className="text-gray-500 flex gap-1 text-sm">
+          <span className="text-gray-500 flex gap-1 text-sm truncate">
             <Link to={`/profile/${postCreator.username}`}>
               @{postCreator.username}
             </Link>
@@ -252,10 +252,10 @@ const Post = ({ post }) => {
                           <div className="flex flex-col flex-1 w-full">
                             <Link to={`/profile/${comment.user.username}`}>
                               <div className="flex items-center gap-2">
-                                <span className="font-bold text-white">
+                                <span className="font-bold text-white truncate">
                                   {comment.user.fullName}
                                 </span>
-                                <span className="text-gray-400 text-sm">
+                                <span className="text-gray-400 text-sm truncate">
                                   @{comment.user.username}
                                 </span>
                               </div>

@@ -180,7 +180,7 @@ const ProfilePage = () => {
                     <FaArrowLeft className="w-4 h-4" />
                   </Link>
                   <div className="flex flex-col">
-                    <p className="font-bold text-lg">{userProfile?.fullName}</p>
+                    <p className="font-bold text-lg truncate">{userProfile?.fullName}</p>
                   </div>
                 </div>
 
@@ -257,10 +257,10 @@ const ProfilePage = () => {
 
                 <div className="flex flex-col gap-4 mt-14 px-4">
                   <div className="flex flex-col">
-                    <span className="font-bold text-lg">
+                    <span className="font-bold text-lg truncate">
                       {userProfile?.fullName}
                     </span>
-                    <span className="text-sm text-slate-500">
+                    <span className="text-sm text-slate-500 truncate">
                       @{userProfile?.username}
                     </span>
                     <br />
@@ -276,7 +276,7 @@ const ProfilePage = () => {
                             href={userProfile.link}
                             target="_blank"
                             rel="noreferrer"
-                            className="text-sm text-blue-500 hover:underline"
+                            className="text-sm text-blue-500 hover:underline truncate"
                           >
                             {userProfile.link.replace("https://" * "")}
                           </a>

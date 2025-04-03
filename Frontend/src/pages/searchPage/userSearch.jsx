@@ -52,30 +52,30 @@ const UserSearch = () => {
       {loading && <p><FaSpinner className="text-4xl m-4 text-blue-600 animate-spin" /></p>}
       {error && <p className="text-red-500 mt-2">{error}</p>}
 
-      <div className="mt-4 bg-gray-900 p-2 rounded-lg">
-        {users.length > 0 ? (
-          users.map((user) => (
-            <div key={user._id} className="p-4 border-b border-gray-500">
-              <div className="flex gap-3  items-center">
-                <Link to={`/profile/${user.username}`} className="flex items-center gap-2">
-                  <img 
-                  src={user.profileImg || "/avatar-placeholder.png"} 
-                  alt="Profile Image" 
-                  className="w-8 h-8 rounded-full border border-gray-700"
-                  />
-                  <div className="text-white">
-                    {user.fullName}
-                    {" "}
-                    <span className="text-gray-400">@{user.username}</span>                    
-                  </div>
-                </Link>
+      {(users.length > 0 || (query && !loading)) && (
+        <div className="mt-4 bg-gray-900 p-2 rounded-lg">
+          {users.length > 0 ? (
+            users.map((user) => (
+              <div key={user._id} className="p-4 border-b border-gray-500">
+                <div className="flex gap-3 items-center">
+                  <Link to={`/profile/${user.username}`} className="flex items-center gap-2">
+                    <img 
+                      src={user.profileImg || "/avatar-placeholder.png"} 
+                      alt="Profile Image" 
+                      className="w-8 h-8 rounded-full border border-gray-700"
+                    />
+                    <div className="text-white truncate">
+                      {user.fullName} <span className="text-gray-400 truncate">@{user.username}</span>                    
+                    </div>
+                  </Link>
+                </div>
               </div>
-            </div>
-          ))
-        ) : (
-          !loading && query && <p className="text-gray-500">No users found...</p>
-        )}
-      </div>
+            ))
+          ) : (
+            <p className="text-gray-500">No users found...</p>
+          )}
+        </div>
+      )}
     </div>
   );
 };
