@@ -31,7 +31,7 @@ function App() {
 
   if (loading) {
     return (
-      <div className="h-screen w-screen flex justify-center items-center text-white ">
+      <div className="h-screen w-screen flex justify-center items-center text-white space-x-2">
         <FaSpinner className="text-4xl text-blue-600 animate-spin" />
         <span> Please Wait...</span>
       </div>

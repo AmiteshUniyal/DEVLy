@@ -94,13 +94,19 @@ const EditProfile = () => {
                   name="email"
                   onChange={handleInputChange}
                 />
-                <textarea
-                  placeholder="Bio"
-                  className="flex-1 bg-gray-800 text-white border border-gray-700 rounded p-2 resize-none"
-                  value={formData.bio}
-                  name="bio"
-                  onChange={handleInputChange}
-                />
+                <div className="relative flex-1">
+                  <textarea
+                    placeholder="Bio"
+                    className="w-full bg-gray-800 text-white border border-gray-700 rounded p-2 resize-none min-h-[42px]"
+                    value={formData.bio}
+                    name="bio"
+                    onChange={handleInputChange}
+                    maxLength={100}
+                  />
+                  <span className="absolute bottom-2 right-3 text-gray-400 text-sm">
+                    {formData.bio.length}/100
+                  </span>
+                </div>
               </div>
 
               {/* Password Fields */}

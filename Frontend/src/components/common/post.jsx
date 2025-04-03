@@ -239,7 +239,7 @@ const Post = ({ post }) => {
                           key={comment._id}
                           className="flex gap-3 items-start bg-gray-800 p-3 rounded-lg shadow-md"
                         >
-                          <div className="w-10 h-10 rounded-full overflow-hidden">
+                          <div className="w-10 h-10 min-w-[40px] min-h-[40px] rounded-full overflow-hidden">
                             <img
                               src={
                                 comment.user.profileImg ||
@@ -249,7 +249,7 @@ const Post = ({ post }) => {
                               className="w-full h-full object-cover"
                             />
                           </div>
-                          <div className="flex flex-col flex-1 w-full">
+                          <div className="flex flex-col flex-1 w-full max-w-full">
                             <Link to={`/profile/${comment.user.username}`}>
                               <div className="flex items-center gap-2">
                                 <span className="font-bold text-white">
@@ -260,7 +260,7 @@ const Post = ({ post }) => {
                                 </span>
                               </div>
                             </Link>
-                            <p className="text-gray-300 break-words overflow-wrap-anywhere whitespace-pre-wrap">
+                            <p className="text-gray-300 break-words overflow-hidden overflow-wrap break-word whitespace-pre-wrap">
                               {comment.text}
                             </p>
                           </div>

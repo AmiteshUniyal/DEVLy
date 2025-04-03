@@ -187,7 +187,8 @@ const ProfilePage = () => {
                 <div className="relative group">
                   <img
                     src={coverImgPrev || userProfile?.coverImg || "/cover.png"}
-                    className="h-52 w-full object-cover"
+                    className="h-52 w-full object-cover overflow-hidden"
+                    style={{ objectFit: "cover", objectPosition: "center", maxHeight: "208px" }}
                     alt="cover image"
                   />
                   {isMyProfile && (
@@ -213,14 +214,15 @@ const ProfilePage = () => {
                   />
 
                   <div className="absolute -bottom-16 left-3">
-                    <div className="w-32 rounded-full relative group">
+                    <div className="w-32 h-32 rounded-full relative group">
                       <img
                         src={
                           profileImgPrev ||
                           userProfile?.profileImg ||
                           "/avatar-placeholder.png"
                         }
-                        className="rounded-full border-4 border-gray-800"
+                        className="rounded-full border-4 border-gray-800 w-32 h-32 object-cover overflow-hidden"
+                        style={{ objectFit: "cover", objectPosition: "center" }}
                       />
                       {isMyProfile && (
                         <div className="absolute top-5 right-3 p-1 bg-blue-500 rounded-full group-hover:opacity-100 opacity-0 cursor-pointer">

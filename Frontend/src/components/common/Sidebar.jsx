@@ -110,19 +110,23 @@ export default function Sidebar() {
       </div>
 
       {/* Bottom Navigation Bar */}
-      <div className="fixed  bottom-0 w-full border-t flex justify-around py-3 md:hidden z-50" style={{backgroundImage: "linear-gradient(to right,rgb(13, 32, 59), #0a0a0a)"}}>
-        <BottomNavLink to="/" icon={<MdHomeFilled className="w-6 h-6" />} />
-        <BottomNavLink to="/search" icon={<FiSearch className="w-6 h-6" />} />
+      <div className="fixed  bottom-0 w-full border-t flex justify-around py-4 md:hidden z-50" style={{ backgroundImage: "linear-gradient(to right, rgb(13, 32, 59), #0a0a0a)", height: "60px" }}>
+        
+        <BottomNavLink to="/" icon={<MdHomeFilled className="w-7 h-7" />} /> 
+        <BottomNavLink to="/search" icon={<FiSearch className="w-7 h-7" />} /> 
+        
         {location.pathname === "/" && (
           <button onClick={toggleFlag} className="text-white">
-            <MdAddCircleOutline className="w-6 h-6" />
+            <MdAddCircleOutline className="w-7 h-7" /> 
           </button>
         )}
-        <BottomNavLink to="/notifications" icon={<IoNotifications className="w-6 h-6"/>} />
-        <BottomNavLink to={`/profile/${authUser?.username}`} icon={<FaUser className="w-5 h-5" />} />
-        <div className=" flex items-center">
+        
+        <BottomNavLink to="/notifications" icon={<IoNotifications className="w-7 h-7"/>} /> 
+        <BottomNavLink to={`/profile/${authUser?.username}`} icon={<FaUser className="w-6 h-6" />} />
+        
+        <div className="flex items-center">
           <BiLogOut
-            className="w-5 h-5 cursor-pointer"
+            className="w-6 h-6 cursor-pointer"
             onClick={(e) => {
               e.preventDefault();
               setModal(true);

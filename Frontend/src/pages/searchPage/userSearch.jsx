@@ -64,7 +64,7 @@ const UserSearch = () => {
                       alt="Profile Image" 
                       className="w-8 h-8 rounded-full border border-gray-700"
                     />
-                    <div className="text-white truncate w-32">
+                    <div className="text-white w-32">
                       {user.fullName.length > 15 ? `${user.fullName.slice(0, 15)}...` : user.fullName}{" "}
                       <span className="text-gray-400">
                         @{user.username.length > 15 ? `${user.username.slice(0, 15)}...` : user.username}
