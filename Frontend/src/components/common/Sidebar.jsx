@@ -83,7 +83,7 @@ export default function Sidebar() {
               <div className="mb-4 flex gap-2 items-start transition-all duration-300 hover:bg-white hover:text-black py-2 px-4 rounded-full group">
                 <div className="hidden md:inline-flex">
                   <img
-                    className="w-8 rounded-full"
+                    className="w-8 h-8 rounded-full"
                     src={authUser?.profileImg || "/avatar-placeholder.png"}
                     alt="profile"
                   />
