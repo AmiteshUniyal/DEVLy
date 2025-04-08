@@ -31,9 +31,17 @@ function App() {
 
   if (loading) {
     return (
-      <div className="h-screen w-screen flex justify-center items-center text-white space-x-2">
-        <FaSpinner className="text-4xl text-blue-600 animate-spin" />
-        <span> Please Wait...</span>
+      <div className="h-screen w-screen flex flex-col justify-center items-center text-white px-4 text-center space-y-4">
+        <div className="flex items-center space-x-2">
+          <FaSpinner className="text-4xl text-blue-400 animate-spin" />
+          <span className="text-lg text-gray-200">Please wait...</span>
+        </div>
+        <div className="max-w-md">
+          <h2 className="text-blue-400 font-semibold text-lg">🚧 Cold Start in Progress</h2>
+          <p className="text-sm text-gray-400 mt-1">
+            The backend server is waking up—this only happens on the first visit. Everything will run smoothly in a few seconds!
+          </p>
+        </div>
       </div>
     );
   }
