@@ -1,4 +1,4 @@
-import express, { urlencoded } from 'express';
+import express from 'express';
 import authRoutes from './routes/auth.routes.js';
 import postRoutes from './routes/post.routes.js'
 import notifRoutes from './routes/notification.routes.js'
@@ -26,7 +26,7 @@ app.use(express.urlencoded({extended : true}));
 app.use(cookieParser());
 app.use(
     cors({
-      origin: process.env.F_URL || "https://dev-ly.vercel.app",
+      origin: process.env.F_URL || "http://localhost:3000",
       credentials: true,
       methods: ["GET", "POST", "PUT", "DELETE"],
       allowedHeaders: ["Content-Type", "Authorization"],
