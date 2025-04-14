@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { MdOutlineMail, MdPassword } from "react-icons/md";
+import { MdPassword } from "react-icons/md";
+import { FaUser } from "react-icons/fa";
 import axiosInstance from "../../api/axiosInstance";
 import AppContext from "../../context/contextapi";
 
@@ -43,6 +44,13 @@ const LoginPage = () => {
     }
   };
 
+  const fillDemo = () => {
+    setFormData({
+      username: "demoUser",
+      password: "123456",
+    });
+  };
+
   return (
     <div className="w-screen h-screen flex">
       <div className="flex-1 hidden lg:flex items-center justify-center">
@@ -65,7 +73,7 @@ const LoginPage = () => {
           <h1 className="text-4xl font-bold text-white">Let's go.</h1>
 
           <label className="flex items-center gap-2 border border-gray-400 text-gray-300 rounded-md p-2 focus-within:ring-2 focus-within:ring-blue-500">
-            <MdOutlineMail className="text-lg" />
+            <FaUser className="text-lg" />
             <input
               type="text"
               className="flex-1 bg-transparent outline-none text-white placeholder-gray-400"
@@ -98,12 +106,22 @@ const LoginPage = () => {
           {error && <p className="text-red-500 text-sm text-center">{error}</p>}
         </form>
         <div className="flex flex-col items-center gap-2 mt-4">
-          <p className="text-white text-lg">{"Don't"} have an account?</p>
+          <p className="text-white text-lg">Don't have an account?</p>
           <Link to="/signup">
             <button className="w-full py-2 px-6 border border-blue-600 text-blue-600 rounded-full hover:bg-blue-600 hover:text-white transition">
               Sign up
             </button>
           </Link>
+        </div>
+        <div className="mt-6 text-center px-4">
+          <p className="text-gray-400 text-sm mb-2">For demo purposes</p>
+          <button
+            onClick={fillDemo}
+            type="button"
+            className="w-full md:w-auto px-6 py-2 bg-gray-800 text-white border border-gray-600 rounded-md hover:bg-gray-700 transition"
+          >
+            Guest Account
+          </button>
         </div>
       </div>
     </div>
