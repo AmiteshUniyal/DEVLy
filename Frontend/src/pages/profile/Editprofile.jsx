@@ -82,8 +82,8 @@ const EditProfile = () => {
                 {authUser.username === "demoUser" ? 
                   (<input
                     type="text"
-                    className="flex-1 bg-gray-800 text-white border border-gray-700 rounded p-2"
-                    value={"Guest's aren't allowed to change this credential"}
+                    className="flex-1 bg-gray-800 text-gray-500 border border-gray-700 rounded p-2"
+                    value={"Not Allowed to Change"}
                     name="username"
                     disabled
                   />
@@ -127,15 +127,15 @@ const EditProfile = () => {
                 (
                   <div className="flex flex-col md:flex-row gap-4">
                     <input
-                      type="password"
-                      className="flex-1 bg-gray-800 text-white border border-gray-700 rounded p-2"
-                      value={"Guest's aren't allowed to change this credential"}
+                      type="text"
+                      className="flex-1 bg-gray-800 text-gray-500 border border-gray-700 rounded p-2"
+                      value={"Not Allowed to Change"}
                       name="currentPassword"
                     />
                     <input
-                      type="password"
-                      className="flex-1 bg-gray-800 text-white border border-gray-700 rounded p-2"
-                      value={"Guest's aren't allowed to change this credential"}
+                      type="text"
+                      className="flex-1 bg-gray-800 text-gray-500 border border-gray-700 rounded p-2"
+                      value={"Not Allowed to Change"}
                       name="newPassword"
                     />
                   </div>
