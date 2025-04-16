@@ -110,7 +110,7 @@ const EditProfile = () => {
                 <div className="relative flex-1">
                   <textarea
                     placeholder="Bio"
-                    className="w-full flex-1 bg-gray-800 text-white border border-gray-700 rounded p-2 resize-none min-h-[42px]"
+                    className="w-full h-full bg-gray-800 text-white border border-gray-700 rounded p-2 resize-none min-h-[42px] md:min-h-[38px]"
                     value={formData.bio}
                     name="bio"
                     onChange={handleInputChange}
@@ -131,12 +131,14 @@ const EditProfile = () => {
                       className="flex-1 bg-gray-800 text-gray-500 border border-gray-700 rounded p-2"
                       value={"Not Allowed to Change"}
                       name="currentPassword"
+                      disabled
                     />
                     <input
                       type="text"
                       className="flex-1 bg-gray-800 text-gray-500 border border-gray-700 rounded p-2"
                       value={"Not Allowed to Change"}
                       name="newPassword"
+                      disabled
                     />
                   </div>
                 ) : (
