@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axiosInstance from "../../api/axiosInstance";
+import AppContext from "../../context/contextapi";
 
 const EditProfile = () => {
     const [formData, setFormData] = useState({
@@ -11,6 +12,8 @@ const EditProfile = () => {
         newPassword: "",
         currentPassword: "",
     });
+
+  const { authUser } = useContext(AppContext);
 
   const [isModal, setModal] = useState(false);
 
@@ -76,14 +79,24 @@ const EditProfile = () => {
                   name="fullName"
                   onChange={handleInputChange}
                 />
-                <input
-                  type="text"
-                  placeholder="Username"
-                  className="flex-1 bg-gray-800 text-white border border-gray-700 rounded p-2"
-                  value={formData.username}
-                  name="username"
-                  onChange={handleInputChange}
-                />
+                {authUser.username === "demoUser" ? 
+                  (<input
+                    type="text"
+                    className="flex-1 bg-gray-800 text-white border border-gray-700 rounded p-2"
+                    value={"Guest's aren't allowed to change this credential"}
+                    name="username"
+                    disabled
+                  />
+                  ) : (
+                  <input
+                    type="text"
+                    placeholder="Username"
+                    className="flex-1 bg-gray-800 text-white border border-gray-700 rounded p-2"
+                    value={formData.username}
+                    name="username"
+                    onChange={handleInputChange}
+                  />)
+                }
               </div>
               <div className="flex flex-col md:flex-row gap-4">
                 <input
@@ -110,24 +123,43 @@ const EditProfile = () => {
               </div>
 
               {/* Password Fields */}
-              <div className="flex flex-col md:flex-row gap-4">
-                <input
-                  type="password"
-                  placeholder="Current Password"
-                  className="flex-1 bg-gray-800 text-white border border-gray-700 rounded p-2"
-                  value={formData.currentPassword}
-                  name="currentPassword"
-                  onChange={handleInputChange}
-                />
-                <input
-                  type="password"
-                  placeholder="New Password"
-                  className="flex-1 bg-gray-800 text-white border border-gray-700 rounded p-2"
-                  value={formData.newPassword}
-                  name="newPassword"
-                  onChange={handleInputChange}
-                />
-              </div>
+              {authUser.username === "demoUser" ?
+                (
+                  <div className="flex flex-col md:flex-row gap-4">
+                    <input
+                      type="password"
+                      className="flex-1 bg-gray-800 text-white border border-gray-700 rounded p-2"
+                      value={"Guest's aren't allowed to change this credential"}
+                      name="currentPassword"
+                    />
+                    <input
+                      type="password"
+                      className="flex-1 bg-gray-800 text-white border border-gray-700 rounded p-2"
+                      value={"Guest's aren't allowed to change this credential"}
+                      name="newPassword"
+                    />
+                  </div>
+                ) : (
+                  <div className="flex flex-col md:flex-row gap-4">
+                    <input
+                      type="password"
+                      placeholder="Current Password"
+                      className="flex-1 bg-gray-800 text-white border border-gray-700 rounded p-2"
+                      value={formData.currentPassword}
+                      name="currentPassword"
+                      onChange={handleInputChange}
+                    />
+                    <input
+                      type="password"
+                      placeholder="New Password"
+                      className="flex-1 bg-gray-800 text-white border border-gray-700 rounded p-2"
+                      value={formData.newPassword}
+                      name="newPassword"
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                )
+              }
 
               {/* Link */}
               <input
