@@ -265,7 +265,7 @@ const ProfilePage = () => {
                       @{userProfile?.username.length > 15 ? `${userProfile?.username.slice(0, 15)}...`: userProfile?.username}
                     </span>
                     <br />
-                    <span className="text-sm my-1">{userProfile?.bio}</span>
+                    <span className="text-sm my-1 break-all">{userProfile?.bio}</span>
                   </div>
 
                   <div className="flex gap-4 flex-wrap">
