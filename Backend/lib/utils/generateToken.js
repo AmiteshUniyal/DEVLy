@@ -8,7 +8,7 @@ export const generateTokenAndSetCookie = (userId, res) => {
 	res.cookie("jwt", token, {
 		maxAge: 15 * 24 * 60 * 60 * 1000, //ms
 		httpOnly: true,     // prevent XSS attacks cross-site scripting attacks
-		sameSite: "None", // ✅ Required for cross-origin requests
+		sameSite: "none", // ✅ Required for cross-origin requests
 		secure: true, // ✅ Must be true for cross-origin cookies in production
 	});
 };

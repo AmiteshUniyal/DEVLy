@@ -122,7 +122,7 @@ export const logout = async (req, res) => {
       res.clearCookie("jwt", {
         httpOnly: true,
         secure: true,
-        sameSite: "None",
+        sameSite: "none",
         path: "/",
       });
   
@@ -130,7 +130,7 @@ export const logout = async (req, res) => {
         expires: new Date(0),
         httpOnly: true,
         secure: true,
-        sameSite: "None",
+        sameSite: "none",
         path: "/",
       });
   
